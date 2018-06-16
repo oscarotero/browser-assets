@@ -2,6 +2,10 @@
 
 Simple utility to copy files from `node_modules` to a public directory in order to be loaded by the browser.
 
+```sh
+npm install browser-assets
+```
+
 ## Why?
 
 Because sometimes I want to use some packages installed with npm in the browser, but loaded as native ES6 modules, so I don't need webpack, babel or any other transpiler/packer/whatever, simply copy these files and that's all.
