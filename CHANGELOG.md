@@ -15,9 +15,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Fixed changelog versions
 
-## 0.1.0 - 2018-06-16
+## 1.0.0 - 2018-06-16
 
 First version
 
 
-[1.1.0]: https://github.com/oscarotero/browser-assets/compare/v0.1.0...v1.1.0
+[1.1.0]: https://github.com/oscarotero/browser-assets/compare/v1.0.0...v1.1.0
