@@ -14,6 +14,8 @@ Because sometimes I want to use some packages installed with npm in the browser,
 
 You only need to define the packages you want to install and the destination folder. This tool will search the `package.json` file of each package and copy the files defined in [files field](https://docs.npmjs.com/files/package.json#files).
 
+If no `files` field is found, uses the `browser` and `main` field as fallback.
+
 If all files of a package are located in the same subdirectory, it strip that subdirectory. It's common to use subdirectories like `src`, `dist`, etc.
 
 ## Usage

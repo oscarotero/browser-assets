@@ -37,11 +37,17 @@ function getPackageFiles(dir) {
         return globby(package.files, { cwd: dir });
     }
 
+    if (package.browser) {
+        return Promise.resolve([package.browser]);
+    }
+
     if (package.main) {
         return Promise.resolve([package.main]);
     }
 
-    throw new Error(`No "files" or "main" fields found in ${packageFile}`);
+    throw new Error(
+        `No "files", "browser" or "main" fields found in ${packageFile}`
+    );
 }
 
 function stripBasePath(files) {
