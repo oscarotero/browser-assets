@@ -8,13 +8,11 @@ npm install browser-assets
 
 ## Why?
 
-Because sometimes I want to use some packages installed with npm in the browser, but loaded as native ES6 modules, so I don't need webpack, babel or any other transpiler/packer/whatever, simply copy these files and that's all.
+Because sometimes I want to use some packages installed with npm in the browser, but loaded as native ES6 modules, so I don't need webpack, rollup or any other module bundler, simply copy these files in a directory.
 
 ## How it works?
 
-You only need to define the packages you want to install and the destination folder. This tool will search the `package.json` file of each package and copy the files defined in [files field](https://docs.npmjs.com/files/package.json#files).
-
-If no `files` field is found, uses the `browser` and `main` field as fallback.
+You only need to define the package names you want to use and the destination folder. This tool will search them in `node_modules` and read the `package.json` file to get the list of the files that must be copied. It will use the first entry found of `module`, `files`, `browser` and `main` in this order or priority.
 
 If all files of a package are located in the same subdirectory, it strip that subdirectory. It's common to use subdirectories like `src`, `dist`, etc.
 

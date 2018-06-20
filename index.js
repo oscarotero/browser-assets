@@ -33,6 +33,14 @@ function getPackageFiles(dir) {
     const packageFile = path.join(dir, 'package.json');
     const package = require(packageFile);
 
+    if (package.module) {
+        if (Array.isArray(package.module)) {
+            return Promise.resolve(package.module);
+        }
+
+        return Promise.resolve([package.module]);
+    }
+
     if (package.files) {
         const files = package.files.map(file => {
             try {
@@ -56,7 +64,7 @@ function getPackageFiles(dir) {
     }
 
     throw new Error(
-        `No "files", "browser" or "main" fields found in ${packageFile}`
+        `No "module", "files", "browser" or "main" fields found in ${packageFile}`
     );
 }
 
