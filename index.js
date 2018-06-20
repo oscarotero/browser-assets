@@ -34,7 +34,17 @@ function getPackageFiles(dir) {
     const package = require(packageFile);
 
     if (package.files) {
-        return globby(package.files, { cwd: dir });
+        const files = package.files.map(file => {
+            try {
+                if (fs.lstatSync(path.join(dir, file)).isDirectory()) {
+                    return path.join(file, '**');
+                }
+            } catch (e) {}
+
+            return file;
+        });
+
+        return globby(files, { cwd: dir });
     }
 
     if (package.browser) {
