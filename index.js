@@ -34,11 +34,15 @@ function getPackageFiles(dir) {
     const package = require(packageFile);
 
     if (package.module) {
-        if (Array.isArray(package.module)) {
-            return Promise.resolve(package.module);
-        }
-
         return Promise.resolve([package.module]);
+    }
+
+    if (package.modules) {
+        return Promise.resolve(package.module);
+    }
+
+    if (package['modules.root']) {
+        return globby(path.join(package['modules.root'], '**'), { cwd: dir });
     }
 
     if (package.files) {
@@ -64,7 +68,7 @@ function getPackageFiles(dir) {
     }
 
     throw new Error(
-        `No "module", "files", "browser" or "main" fields found in ${packageFile}`
+        `No "module", "modules", "modules.root", "files", "browser" or "main" fields found in ${packageFile}`
     );
 }
 
