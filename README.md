@@ -22,5 +22,7 @@ If all files of a package are located in the same subdirectory, it strip that su
 const assets = require('browser-assets');
 
 assets(['package1', '@vendor/package2', 'package3'], 'public/vendor')
-	.then(() => console.log('Vendor files copied!'))
+	.then(files =>
+		console.log('The following vendor files were copied:', files)
+	)
 ```

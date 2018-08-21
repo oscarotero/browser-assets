@@ -3,7 +3,7 @@ const path = require('path');
 const globby = require('globby');
 const fs = require('fs-extra');
 
-async function package(name, dest) {
+async function package(name, dest, files) {
     const dir = resolvePkg(name);
 
     if (!dir) {
@@ -17,6 +17,7 @@ async function package(name, dest) {
         fromFiles.map((fromFile, i) => {
             const from = path.join(dir, fromFile);
             const to = path.join(dest, name, toFiles[i]);
+            files.push(to);
 
             return fs.copy(from, to);
         })
@@ -25,8 +26,11 @@ async function package(name, dest) {
 
 async function copy(packages, dest = 'vendor') {
     await fs.remove(dest);
+    const files = [];
 
-    return Promise.all(packages.map(name => package(name, dest)));
+    return Promise.all(packages.map(name => package(name, dest, files))).then(
+        () => files
+    );
 }
 
 function getPackageFiles(dir) {
@@ -34,11 +38,15 @@ function getPackageFiles(dir) {
     const package = require(packageFile);
 
     if (package.module) {
-        if (Array.isArray(package.module)) {
-            return Promise.resolve(package.module);
-        }
-
         return Promise.resolve([package.module]);
+    }
+
+    if (package.modules) {
+        return Promise.resolve(package.module);
+    }
+
+    if (package['modules.root']) {
+        return globby(path.join(package['modules.root'], '**'), { cwd: dir });
     }
 
     if (package.files) {
@@ -64,7 +72,7 @@ function getPackageFiles(dir) {
     }
 
     throw new Error(
-        `No "module", "files", "browser" or "main" fields found in ${packageFile}`
+        `No "module", "modules", "modules.root", "files", "browser" or "main" fields found in ${packageFile}`
     );
 }
 
