@@ -37,6 +37,15 @@ assets(packages, dest)
 	.then(files => console.log('The following vendor files were copied:', files));
 ```
 
+## CLI
+
+There's a `browser-assets` command to copy files from CLI environments:
+
+```sh
+browser-assets package1 @vendor/package2 package3 --dest public/vendor
+```
+
+
 ---
 
 ### References
