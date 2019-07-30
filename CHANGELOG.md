@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) 
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.6.1] - 2019-07-31
+### Fixed
+- Add `.js` extension to the file defined in `main` file if it's missing
+
 ## [1.6.0] - 2019-07-31
 ### Changed
 - Updated dependencies
@@ -39,6 +43,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## 1.0.0 - 2018-06-16
 First version
 
+[1.6.1]: https://github.com/oscarotero/browser-assets/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/oscarotero/browser-assets/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/oscarotero/browser-assets/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/oscarotero/browser-assets/compare/v1.3.0...v1.4.0

@@ -68,7 +68,13 @@ function getPackageFiles(dir) {
     }
 
     if (package.main) {
-        return Promise.resolve([package.main]);
+        let main = package.main;
+
+        if (!path.extname(main)) {
+            main += '.js';
+        }
+
+        return Promise.resolve([main]);
     }
 
     throw new Error(
